@@ -1,0 +1,57 @@
+@use '../styles/tokens' as *;
+@use '../styles/mixins' as *;
+
+.earnings {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $space-5;
+  flex-wrap: wrap;
+}
+
+.tabs {
+  display: flex;
+  gap: 4px;
+  padding: 4px;
+  border-radius: $radius-pill;
+  background: var(--surface-muted);
+  width: fit-content;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.tab {
+  min-height: 40px;
+  padding: 0 $space-4;
+  border: 0;
+  border-radius: $radius-pill;
+  background: transparent;
+  color: var(--muted);
+  font-weight: 600;
+  white-space: nowrap;
+  @include focus-ring;
+}
+
+.tabOn {
+  background: var(--surface-strong);
+  color: var(--ink);
+  box-shadow: 0 1px 3px rgba(18, 45, 69, 0.12);
+}
+
+.escrowRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $space-3;
+  flex-wrap: wrap;
+  padding: $space-4;
+  border-radius: $radius-md;
+  background: var(--surface-muted);
+  text-decoration: none;
+  transition: background-color 0.15s ease;
+  @include focus-ring;
+
+  &:hover {
+    background: #ececf2;
+  }
+}

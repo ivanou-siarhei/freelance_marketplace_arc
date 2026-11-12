@@ -1,0 +1,9 @@
+node_modules
+dist
+contracts
+.env
+.env.*
+.git
+*.log
+traces.jsonl
+console.jsonl

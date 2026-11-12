@@ -1,0 +1,387 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+// Shared primitives: buttons, cards, fields, chips, notices. Imported as `ui` by components.
+
+.page {
+  width: 100%;
+  max-width: $page-width;
+  margin: 0 auto;
+  padding: $space-5 $space-4 $space-7;
+
+  @include respond($bp-md) {
+    padding: $space-6 $space-5 64px;
+  }
+}
+
+.pageHead {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+  margin-bottom: $space-5;
+
+  h1 {
+    @include display-text(clamp(30px, 5vw, 44px));
+  }
+
+  p {
+    color: var(--muted);
+    max-width: 60ch;
+  }
+}
+
+.card {
+  @include glass;
+  border-radius: $radius-lg;
+  padding: $space-5;
+}
+
+.inner {
+  background: var(--surface-muted);
+  border-radius: $radius-md;
+  padding: $space-4;
+}
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: $space-4;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+  flex-wrap: wrap;
+}
+
+.spread {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $space-3;
+  flex-wrap: wrap;
+}
+
+.label {
+  @include label-text;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.mono {
+  font-family: $font-mono;
+  font-size: 0.9em;
+}
+
+// ---- buttons ----
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: $space-2;
+  min-height: 44px;
+  padding: 0 $space-5;
+  border-radius: $radius-pill;
+  border: 1px solid transparent;
+  font-weight: 600;
+  font-size: 15px;
+  text-decoration: none;
+  white-space: nowrap;
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    transform 0.12s ease,
+    opacity 0.15s ease;
+  @include focus-ring;
+
+  &:active:not(:disabled) {
+    transform: scale(0.98);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.primary {
+  background: var(--accent);
+  color: var(--accent-ink);
+
+  &:hover:not(:disabled) {
+    background: var(--accent-hover);
+  }
+}
+
+.secondary {
+  background: var(--surface-strong);
+  border-color: var(--border);
+  color: var(--ink);
+
+  &:hover:not(:disabled) {
+    border-color: var(--border-strong);
+  }
+}
+
+.ghost {
+  background: transparent;
+  color: var(--ink-2);
+  padding: 0 $space-3;
+
+  &:hover:not(:disabled) {
+    background: var(--surface-muted);
+  }
+}
+
+.danger {
+  background: var(--danger-soft);
+  color: var(--danger);
+
+  &:hover:not(:disabled) {
+    background: rgba(186, 43, 76, 0.18);
+  }
+}
+
+.block {
+  width: 100%;
+}
+
+.small {
+  min-height: 36px;
+  padding: 0 $space-4;
+  font-size: 14px;
+}
+
+.spinner {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid currentcolor;
+  border-right-color: transparent;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+// ---- forms ----
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  > span {
+    @include label-text;
+  }
+
+  small {
+    color: var(--subtle);
+    font-size: 13px;
+  }
+}
+
+.input,
+.select,
+.textarea {
+  width: 100%;
+  min-height: 46px;
+  padding: 10px $space-4;
+  border-radius: $radius-sm;
+  border: 1px solid var(--border);
+  background: var(--surface-strong);
+  transition: border-color 0.15s ease;
+  @include focus-ring;
+
+  &:hover {
+    border-color: var(--border-strong);
+  }
+
+  &::placeholder {
+    color: var(--subtle);
+  }
+}
+
+.textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.formGrid {
+  display: grid;
+  gap: $space-4;
+
+  @include respond($bp-sm) {
+    grid-template-columns: 1fr 1fr;
+
+    .wide {
+      grid-column: 1 / -1;
+    }
+  }
+}
+
+.wide {
+  min-width: 0;
+}
+
+.amountInput {
+  position: relative;
+
+  input {
+    padding-right: 64px;
+    font-family: $font-display;
+    font-size: 18px;
+  }
+
+  em {
+    position: absolute;
+    right: $space-4;
+    top: 50%;
+    transform: translateY(-50%);
+    font-style: normal;
+    font-weight: 600;
+    color: var(--muted);
+    pointer-events: none;
+  }
+}
+
+// ---- chips and notices ----
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: $radius-pill;
+  background: var(--surface-muted);
+  color: var(--ink-2);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.notice {
+  padding: $space-3 $space-4;
+  border-radius: $radius-md;
+  font-size: 14px;
+  background: var(--info-soft);
+  color: var(--ink);
+  display: flex;
+  gap: $space-3;
+  align-items: flex-start;
+
+  svg {
+    flex: none;
+    margin-top: 2px;
+  }
+}
+
+.noticeWarn {
+  background: var(--warn-soft);
+}
+
+.noticeError {
+  background: var(--danger-soft);
+  color: var(--danger);
+}
+
+.noticeOk {
+  background: var(--success-soft);
+}
+
+.empty {
+  text-align: center;
+  padding: $space-7 $space-4;
+  color: var(--muted);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $space-3;
+
+  h3 {
+    color: var(--ink);
+    font-size: 20px;
+  }
+}
+
+.skeleton {
+  border-radius: $radius-md;
+  background: linear-gradient(90deg, var(--surface-muted) 25%, #ececf2 50%, var(--surface-muted) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s ease infinite;
+  min-height: 120px;
+}
+
+@keyframes shimmer {
+  to {
+    background-position: -200% 0;
+  }
+}
+
+.link {
+  color: var(--accent-hover);
+  font-weight: 500;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+// ---- status badge ----
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 10px;
+  border-radius: $radius-pill;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  background: var(--surface-muted);
+  color: var(--ink-2);
+
+  &::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: currentcolor;
+  }
+}
+
+.badgeOk {
+  background: var(--success-soft);
+  color: var(--success);
+}
+
+.badgeWarn {
+  background: var(--warn-soft);
+  color: var(--warn);
+}
+
+.badgeInfo {
+  background: var(--info-soft);
+  color: var(--accent-hover);
+}
+
+.badgeDanger {
+  background: var(--danger-soft);
+  color: var(--danger);
+}
+
+.amount {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: $font-display;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}

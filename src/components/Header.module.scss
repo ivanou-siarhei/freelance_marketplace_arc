@@ -1,0 +1,121 @@
+@use '../styles/tokens' as *;
+@use '../styles/mixins' as *;
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: rgba(255, 255, 255, 0.78);
+  backdrop-filter: blur(16px) saturate(160%);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+  border-bottom: 1px solid var(--border);
+}
+
+.inner {
+  max-width: $page-width;
+  margin: 0 auto;
+  padding: 10px $space-4;
+  display: flex;
+  align-items: center;
+  gap: $space-4;
+  flex-wrap: wrap;
+
+  @include respond($bp-md) {
+    padding: 12px $space-5;
+    flex-wrap: nowrap;
+  }
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  font-family: $font-display;
+  font-weight: 700;
+  font-size: 21px;
+  letter-spacing: -0.03em;
+  @include focus-ring;
+}
+
+.mark {
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  border-radius: 9px;
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+.nav {
+  display: flex;
+  gap: 4px;
+  order: 3;
+  width: 100%;
+  overflow-x: auto;
+
+  @include respond($bp-md) {
+    order: 0;
+    width: auto;
+    margin-left: $space-4;
+  }
+}
+
+.link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  padding: 0 $space-4;
+  border-radius: $radius-pill;
+  text-decoration: none;
+  color: var(--muted);
+  font-weight: 500;
+  font-size: 15px;
+  white-space: nowrap;
+  transition: background-color 0.15s ease, color 0.15s ease;
+  @include focus-ring;
+
+  &:hover {
+    color: var(--ink);
+    background: var(--surface-muted);
+  }
+}
+
+.active {
+  color: var(--ink);
+  background: var(--surface-muted);
+}
+
+.wallet {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+}
+
+.balance {
+  display: none;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: $radius-pill;
+  background: var(--surface-muted);
+  font-weight: 600;
+  font-size: 14px;
+
+  @include respond($bp-sm) {
+    display: inline-flex;
+  }
+}
+
+.faucet {
+  font-size: 13px;
+  color: var(--accent-hover);
+  text-decoration: none;
+  font-weight: 500;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}

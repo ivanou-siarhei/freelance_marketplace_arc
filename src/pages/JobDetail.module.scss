@@ -1,0 +1,108 @@
+@use '../styles/tokens' as *;
+@use '../styles/mixins' as *;
+
+.layout {
+  display: grid;
+  gap: $space-5;
+  align-items: start;
+
+  @include respond($bp-md) {
+    grid-template-columns: minmax(0, 1.6fr) minmax(300px, 1fr);
+  }
+}
+
+.head {
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+
+  h1 {
+    @include display-text(clamp(28px, 4.5vw, 40px));
+  }
+}
+
+.description {
+  white-space: pre-wrap;
+  color: var(--ink-2);
+  line-height: 1.6;
+  max-width: 68ch;
+}
+
+.aside {
+  @include respond($bp-md) {
+    position: sticky;
+    top: 88px;
+  }
+}
+
+.bidItem {
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+  padding: $space-4;
+  border-radius: $radius-md;
+  background: var(--surface-muted);
+}
+
+.bidHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: $space-3;
+  flex-wrap: wrap;
+}
+
+.proposal {
+  white-space: pre-wrap;
+  color: var(--ink-2);
+  font-size: 15px;
+}
+
+.facts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $space-3;
+}
+
+.fact {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+
+  strong {
+    font-family: $font-display;
+    font-size: 17px;
+  }
+}
+
+.countdown {
+  font-family: $font-display;
+  font-size: 26px;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+}
+
+.hash {
+  font-family: $font-mono;
+  font-size: 12px;
+  word-break: break-all;
+  color: var(--muted);
+}
+
+.link {
+  word-break: break-all;
+}
+
+.amountRow {
+  display: flex;
+  gap: $space-2;
+
+  > :first-child {
+    flex: 1;
+  }
+
+  select {
+    width: 120px;
+    flex: none;
+  }
+}
